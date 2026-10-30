@@ -52,6 +52,7 @@
 
 .item {
   position: relative;
+  height: auto;
   border-radius: var(--radius-lg);
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(20, 20, 22, 0.75);
@@ -94,12 +95,28 @@
 
 .itemHeader {
   width: 100%;
-  display: grid;
-  grid-template-columns: 190px minmax(0, 1fr) auto auto;
-  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   gap: 1.5rem;
   padding: 1.35rem 1.75rem;
   text-align: left;
+}
+
+.itemHeaderText {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr);
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.itemHeaderActions {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
 }
 
 .schedule {
@@ -281,13 +298,20 @@
 
 @media (max-width: 880px) {
   .itemHeader {
-    grid-template-columns: minmax(0, 1fr) auto auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
     gap: 1rem;
     padding: 1.2rem 1.35rem;
   }
 
+  .itemHeaderText {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
   .schedule {
-    grid-column: 1 / -1;
     flex-direction: row;
     align-items: baseline;
     gap: 0.75rem;
@@ -311,6 +335,14 @@
 }
 
 @media (max-width: 768px) {
+  .panelOpen {
+    max-height: 1500px;
+  }
+
+  .panelInner {
+    padding: 1.35rem 1.35rem 2rem;
+  }
+
   .section {
     padding: 3rem 1rem;
   }
@@ -337,12 +369,12 @@
 }
 
 @media (max-width: 520px) {
-  .itemHeader {
-    grid-template-columns: minmax(0, 1fr) auto;
+  .itemHeaderActions {
+    gap: 0.45rem;
   }
 
   .liveBadge {
-    grid-column: 1 / -1;
-    justify-self: start;
+    padding: 0.3rem 0.6rem;
+    letter-spacing: 0.12em;
   }
 }

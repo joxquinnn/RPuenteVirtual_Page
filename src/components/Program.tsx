@@ -37,27 +37,31 @@ export default function Program() {
                   aria-expanded={expanded}
                   aria-controls={panelId}
                 >
-                  <span className={styles.schedule}>
-                    <span className={styles.scheduleTime}>{program.schedule}</span>
-                    <span className={styles.scheduleDays}>{program.days}</span>
-                  </span>
-
-                  <span className={styles.headerText}>
-                    <span className={styles.name}>{program.name}</span>
-                    <span className={styles.host}>{program.host}</span>
-                  </span>
-
-                  {program.live && (
-                    <span className={styles.liveBadge}>
-                      <span className={styles.liveDot} aria-hidden="true" />
-                      En vivo
+                  <span className={styles.itemHeaderText}>
+                    <span className={styles.schedule}>
+                      <span className={styles.scheduleTime}>{program.schedule}</span>
+                      <span className={styles.scheduleDays}>{program.days}</span>
                     </span>
-                  )}
 
-                  <span className={styles.chevron} aria-hidden="true">
-                    <svg viewBox="0 0 24 24">
-                      <path d="m6 9 6 6 6-6" />
-                    </svg>
+                    <span className={styles.headerText}>
+                      <span className={styles.name}>{program.name}</span>
+                      <span className={styles.host}>{program.host}</span>
+                    </span>
+                  </span>
+
+                  <span className={styles.itemHeaderActions}>
+                    {program.live && (
+                      <span className={styles.liveBadge}>
+                        <span className={styles.liveDot} aria-hidden="true" />
+                        En vivo
+                      </span>
+                    )}
+
+                    <span className={styles.chevron} aria-hidden="true">
+                      <svg viewBox="0 0 24 24">
+                        <path d="m6 9 6 6 6-6" />
+                      </svg>
+                    </span>
                   </span>
                 </button>
 
