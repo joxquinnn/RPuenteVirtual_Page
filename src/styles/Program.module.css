@@ -207,18 +207,33 @@
 }
 
 .panelInner {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 2rem;
+  padding: 1.5rem 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.panelImage {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--color-surface);
+}
+
+.panelContent {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  padding: 1.5rem 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  min-width: 0;
 }
 
 
 
 .description {
   width: 100%;
-  margin-bottom: 1.5rem;
   color: rgba(255, 255, 255, 0.86);
   font-size: 0.98rem;
   line-height: 1.6;
@@ -279,8 +294,13 @@
   }
 
   .panelInner {
+    grid-template-columns: 1fr;
     gap: 1.25rem;
     padding: 1.35rem 1.35rem 1.5rem;
+  }
+
+  .panelImage {
+    max-width: 260px;
   }
 
 

@@ -66,21 +66,31 @@ export default function Program() {
                   className={`${styles.panel} ${expanded ? styles.panelOpen : ''}`}
                 >
                   <div className={styles.panelInner}>
-                    <p className={styles.description}>{program.description}</p>
-                    <ul className={styles.metaList}>
-                      <li className={styles.metaItem}>
-                        <span className={styles.metaLabel}>Horario</span>
-                        <span className={styles.metaValue}>{program.schedule}</span>
-                      </li>
-                      <li className={styles.metaItem}>
-                        <span className={styles.metaLabel}>Días</span>
-                        <span className={styles.metaValue}>{program.days}</span>
-                      </li>
-                      <li className={styles.metaItem}>
-                        <span className={styles.metaLabel}>Conduce</span>
-                        <span className={styles.metaValue}>{program.host}</span>
-                      </li>
-                    </ul>
+                    <img
+                      className={styles.panelImage}
+                      src={program.image}
+                      alt={`Imagen de ${program.name}`}
+                      loading="lazy"
+                    />
+
+                    <div className={styles.panelContent}>
+                      <p className={styles.description}>{program.description}</p>
+
+                      <ul className={styles.metaList}>
+                        <li className={styles.metaItem}>
+                          <span className={styles.metaLabel}>Conduce</span>
+                          <span className={styles.metaValue}>{program.host}</span>
+                        </li>
+                        <li className={styles.metaItem}>
+                          <span className={styles.metaLabel}>Días</span>
+                          <span className={styles.metaValue}>{program.days}</span>
+                        </li>
+                        <li className={styles.metaItem}>
+                          <span className={styles.metaLabel}>Horario</span>
+                          <span className={styles.metaValue}>{program.schedule}</span>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </article>

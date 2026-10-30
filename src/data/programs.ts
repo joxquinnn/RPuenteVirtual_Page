@@ -5,6 +5,7 @@ export type Program = {
   schedule: string
   days: string
   description: string
+  image: string
   live: boolean
   accent: 'red' | 'navy' | 'burgundy'
 }
@@ -17,6 +18,7 @@ export const programs: Program[] = [
     schedule: '08:00 — 10:00',
     days: 'Lunes a Viernes',
     description: 'El primer bloque de la jornada con noticias, música y compañía.',
+    image: '/images/program-01.svg',
     live: true,
     accent: 'red',
   },
@@ -27,6 +29,7 @@ export const programs: Program[] = [
     schedule: '12:00 — 14:00',
     days: 'Lunes a Viernes',
     description: 'Transmisión en vivo con la audiencia e invitados del día.',
+    image: '/images/program-02.svg',
     live: false,
     accent: 'navy',
   },
@@ -37,6 +40,7 @@ export const programs: Program[] = [
     schedule: '15:00 — 17:00',
     days: 'Lunes a Viernes',
     description: 'Segmentos, entrevistas y la playlist de la tarde.',
+    image: '/images/program-03.svg',
     live: false,
     accent: 'burgundy',
   },
@@ -47,6 +51,7 @@ export const programs: Program[] = [
     schedule: '20:00 — 22:00',
     days: 'Martes a Viernes',
     description: 'La franja nocturna con sesiones y conversación.',
+    image: '/images/program-04.svg',
     live: false,
     accent: 'red',
   },
@@ -57,6 +62,7 @@ export const programs: Program[] = [
     schedule: '10:00 — 13:00',
     days: 'Sábado y Domingo',
     description: 'Encuentro de la comunidad para cerrar la semana.',
+    image: '/images/program-05.svg',
     live: false,
     accent: 'navy',
   },
