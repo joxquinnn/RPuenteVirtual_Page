@@ -1,24 +1,17 @@
-# REDISEÑO: RESTAURAR IMAGEN Y NUEVA DISTRIBUCIÓN
+# CORRECCIÓN DE BUGS RESPONSIVE EN TARJETAS DE PROGRAMACIÓN
 
-He cambiado de opinión respecto a la tarjeta expandida de los programas. Sí vamos a usar una imagen, ya que servirá para mostrar la foto del locutor o la portada del programa. 
+Por favor, revisa el archivo de estilos de las tarjetas (ej. `ScheduleCard.module.css`) y corrige los siguientes dos problemas en la vista móvil (`@media (max-width: 768px)`):
 
-Por favor, ajusta el interior de la tarjeta expandida (el área que se despliega) de la siguiente manera:
+## 1. Botón "En Vivo" y flecha desalineados
+- **El problema:** En móvil, el layout principal de la tarjeta (el área siempre visible) se rompe, apilando el botón "EN VIVO" y el botón de la flecha debajo del texto sin ningún orden.
+- **La solución:** 
+  - Asegúrate de que el contenedor superior (`header` de la tarjeta) mantenga un `display: flex; justify-content: space-between; align-items: flex-start;` incluso en móviles.
+  - Agrupa la información de texto (horario, título, conductor) en un contenedor interno (`flex: 1; display: flex; flex-direction: column;`).
+  - Agrupa las acciones (Botón En Vivo + Flecha) en otro contenedor alineado a la derecha. Si el espacio es muy estrecho, asegúrate de que el botón "En Vivo" y la flecha se mantengan juntos, o que la flecha quede absolutamente posicionada a la derecha y el botón "En Vivo" quede ordenado debajo del texto.
 
-## 1. Estructura a dos columnas (Escritorio)
-- Crea un contenedor interno con `display: grid; grid-template-columns: 200px 1fr; gap: 2rem;` (o proporciones similares) para separar la imagen de la información.
-
-## 2. Columna Izquierda (Imagen)
-- Restaura el elemento de la imagen.
-- Asegúrate de que tenga un diseño pulido: dale un `border-radius` que coincida con el estilo de la web, usa `aspect-ratio: 1 / 1` u `object-fit: cover` para que no se deforme, y añádele un borde sutil (`border: 1px solid rgba(255,255,255,0.1);`).
-
-## 3. Columna Derecha (Información)
-- Coloca la **descripción breve del programa** en la parte superior de esta columna, con un texto de color claro y buen interlineado (`line-height: 1.6`).
-- Debajo de la descripción (separado por un margen), acomoda los metadatos. Puedes usar un pequeño grid de 2 o 3 columnas internas para mostrar:
-  1. **Conduce:** Nombre del locutor.
-  2. **Días:** Fecha/días de emisión.
-  3. **Horario:** Horario del bloque.
-- Mantén el estilo elegante para estos datos: las etiquetas ("CONDUCE", "DÍAS") en tamaño pequeño y mayúsculas, y los valores en blanco destacando.
-
-## 4. Responsive (Móviles)
-- En pantallas pequeñas (`@media (max-width: 768px)`), el contenedor de dos columnas debe pasar a una sola columna (`grid-template-columns: 1fr;`).
-- La imagen debe quedar arriba y la información debajo, adaptándose al ancho del celular.
+## 2. Contenido cortado (Overflow) en la tarjeta expandida
+- **El problema:** Al desplegar la tarjeta en móvil, el contenido (imagen y descripción) se desborda por debajo. El fondo oscuro de la tarjeta no crece para contener la información.
+- **La solución:** 
+  - Revisa cómo estás animando o mostrando el contenido expandido. Si usas `max-height` para la transición de apertura, el valor máximo se queda corto en móviles. Auméntalo en el media query (ej. `max-height: 1500px;` cuando está abierta).
+  - Asegúrate de que la tarjeta principal tenga `height: auto !important;` y no una altura fija.
+  - Añade un `padding-bottom` adecuado al interior del área expandida para que respire al final y no quede pegado al borde.
