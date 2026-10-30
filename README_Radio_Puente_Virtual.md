@@ -1,30 +1,24 @@
-# EJECUCIÓN TÉCNICA OBLIGATORIA — CORRECCIÓN RESPONSIVE EN PROGRAMACIÓN
+# REDISEÑO: RESTAURAR IMAGEN Y NUEVA DISTRIBUCIÓN
 
-**IMPORTANTE PARA LA IA GENERADORA:** El encabezado de la sección de Programación está rompiendo el diseño en dispositivos móviles. El contenedor que agrupa el título y el texto descriptivo está forzando una distribución en fila, provocando que el texto derecho quede colapsado.
+He cambiado de opinión respecto a la tarjeta expandida de los programas. Sí vamos a usar una imagen, ya que servirá para mostrar la foto del locutor o la portada del programa. 
 
-## 1. Ajuste del Encabezado en Móviles (`ScheduleSection.module.css` o equivalente)
-- **El problema:** El contenedor superior (título a la izquierda, párrafo a la derecha) mantiene la estructura de escritorio en pantallas pequeñas.
-- **La solución (CSS):**
-  - Localiza el contenedor del encabezado de la sección.
-  - Añade o modifica la regla `@media (max-width: 768px)` para este contenedor.
-  - Obliga a que los elementos se apilen verticalmente y ocupen todo el ancho:
-    ```css
-    @media (max-width: 768px) {
-      .headerContainer /* reemplaza con la clase real del contenedor */ {
-        display: flex;
-        flex-direction: column; /* Apila el título y el texto */
-        align-items: flex-start;
-        gap: 1.5rem;
-      }
-      
-      .headerText /* reemplaza con la clase real del párrafo */ {
-        width: 100%;
-        max-width: 100%;
-        text-align: left;
-      }
-    }
-    ```
+Por favor, ajusta el interior de la tarjeta expandida (el área que se despliega) de la siguiente manera:
 
-## 2. Revisión del Contenedor General
-- Aprovecha de revisar que las tarjetas de los programas tengan `width: 100%;` en la versión móvil para aprovechar el espacio.
-- Asegúrate de que el padding lateral de la sección en móviles no sea excesivo (un `padding: 2rem 1rem;` suele ser suficiente).
+## 1. Estructura a dos columnas (Escritorio)
+- Crea un contenedor interno con `display: grid; grid-template-columns: 200px 1fr; gap: 2rem;` (o proporciones similares) para separar la imagen de la información.
+
+## 2. Columna Izquierda (Imagen)
+- Restaura el elemento de la imagen.
+- Asegúrate de que tenga un diseño pulido: dale un `border-radius` que coincida con el estilo de la web, usa `aspect-ratio: 1 / 1` u `object-fit: cover` para que no se deforme, y añádele un borde sutil (`border: 1px solid rgba(255,255,255,0.1);`).
+
+## 3. Columna Derecha (Información)
+- Coloca la **descripción breve del programa** en la parte superior de esta columna, con un texto de color claro y buen interlineado (`line-height: 1.6`).
+- Debajo de la descripción (separado por un margen), acomoda los metadatos. Puedes usar un pequeño grid de 2 o 3 columnas internas para mostrar:
+  1. **Conduce:** Nombre del locutor.
+  2. **Días:** Fecha/días de emisión.
+  3. **Horario:** Horario del bloque.
+- Mantén el estilo elegante para estos datos: las etiquetas ("CONDUCE", "DÍAS") en tamaño pequeño y mayúsculas, y los valores en blanco destacando.
+
+## 4. Responsive (Móviles)
+- En pantallas pequeñas (`@media (max-width: 768px)`), el contenedor de dos columnas debe pasar a una sola columna (`grid-template-columns: 1fr;`).
+- La imagen debe quedar arriba y la información debajo, adaptándose al ancho del celular.
