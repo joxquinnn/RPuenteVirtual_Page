@@ -1,0 +1,350 @@
+.section {
+  position: relative;
+  margin: 0;
+  padding: clamp(4.5rem, 9vw, 7.5rem) 0;
+  background: var(--color-block-blue);
+  height: auto;
+  min-height: min-content;
+  overflow: hidden;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2MDAnIGhlaWdodD0nNjAwJyB2aWV3Qm94PScwIDAgNjAwIDYwMCc+PGcgZmlsbD0nbm9uZScgc3Ryb2tlPScjZmZmZmZmJyBzdHJva2Utd2lkdGg9JzEuNCcgb3BhY2l0eT0nMC45Jz48cGF0aCBkPSdNMCAzMCBRIDc1IDQgMTUwIDMwIFQgMzAwIDMwIFQgNDUwIDMwIFQgNjAwIDMwJy8+PHBhdGggZD0nTTAgNjQgUSA3NSAzOCAxNTAgNjQgVCAzMDAgNjQgVCA0NTAgNjQgVCA2MDAgNjQnLz48cGF0aCBkPSdNMCA5OCBRIDc1IDcyIDE1MCA5OCBUIDMwMCA5OCBUIDQ1MCA5OCBUIDYwMCA5OCcvPjxwYXRoIGQ9J00wIDEzMiBRIDc1IDEwNiAxNTAgMTMyIFQgMzAwIDEzMiBUIDQ1MCAxMzIgVCA2MDAgMTMyJy8+PHBhdGggZD0nTTAgMTY2IFEgNzUgMTQwIDE1MCAxNjYgVCAzMDAgMTY2IFQgNDUwIDE2NiBUIDYwMCAxNjYnLz48cGF0aCBkPSdNMCAyMDAgUSA3NSAxNzQgMTUwIDIwMCBUIDMwMCAyMDAgVCA0NTAgMjAwIFQgNjAwIDIwMCcvPjxwYXRoIGQ9J00wIDIzNCBRIDc1IDIwOCAxNTAgMjM0IFQgMzAwIDIzNCBUIDQ1MCAyMzQgVCA2MDAgMjM0Jy8+PHBhdGggZD0nTTAgMjY4IFEgNzUgMjQyIDE1MCAyNjggVCAzMDAgMjY4IFQgNDUwIDI2OCBUIDYwMCAyNjgnLz48cGF0aCBkPSdNMCAzMDIgUSA3NSAyNzYgMTUwIDMwMiBUIDMwMCAzMDIgVCA0NTAgMzAyIFQgNjAwIDMwMicvPjxwYXRoIGQ9J00wIDMzNiBRIDc1IDMxMCAxNTAgMzM2IFQgMzAwIDMzNiBUIDQ1MCAzMzYgVCA2MDAgMzM2Jy8+PHBhdGggZD0nTTAgMzcwIFEgNzUgMzQ0IDE1MCAzNzAgVCAzMDAgMzcwIFQgNDUwIDM3MCBUIDYwMCAzNzAnLz48cGF0aCBkPSdNMCA0MDQgUSA3NSAzNzggMTUwIDQwNCBUIDMwMCA0MDQgVCA0NTAgNDA0IFQgNjAwIDQwNCcvPjxwYXRoIGQ9J00wIDQzOCBRIDc1IDQxMiAxNTAgNDM4IFQgMzAwIDQzOCBUIDQ1MCA0MzggVCA2MDAgNDM4Jy8+PHBhdGggZD0nTTAgNDcyIFEgNzUgNDQ2IDE1MCA0NzIgVCAzMDAgNDcyIFQgNDUwIDQ3MiBUIDYwMCA0NzInLz48cGF0aCBkPSdNMCA1MDYgUSA3NSA0ODAgMTUwIDUwNiBUIDMwMCA1MDYgVCA0NTAgNTA2IFQgNjAwIDUwNicvPjxwYXRoIGQ9J00wIDU0MCBRIDc1IDUxNCAxNTAgNTQwIFQgMzAwIDU0MCBUIDQ1MCA1NDAgVCA2MDAgNTQwJy8+PHBhdGggZD0nTTAgNTc0IFEgNzUgNTQ4IDE1MCA1NzQgVCAzMDAgNTc0IFQgNDUwIDU3NCBUIDYwMCA1NzQnLz48cGF0aCBkPSdNMCA2MDggUSA3NSA1ODIgMTUwIDYwOCBUIDMwMCA2MDggVCA0NTAgNjA4IFQgNjAwIDYwOCcvPjwvZz48L3N2Zz4=");
+  background-size: 600px 600px;
+  opacity: 0.03;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  width: min(100% - 2.5rem, var(--container-width));
+  margin: 0 auto;
+}
+
+.header {
+  max-width: 900px;
+  margin: 0 auto 2.75rem;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.62);
+  font-weight: 600;
+}
+
+.title {
+  margin: 0.75rem 0 0;
+}
+
+.subtitle {
+  margin: 0.9rem auto 0;
+  max-width: 52ch;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.newsContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.newsCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+  min-height: 480px;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: rgba(8, 9, 13, 0.55);
+  box-shadow: 0 16px 40px -34px rgba(0, 0, 0, 0.95);
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base),
+    background var(--transition-base);
+}
+
+.newsCard:hover {
+  transform: translateY(-2px);
+  background: rgba(8, 9, 13, 0.78);
+  box-shadow: 0 26px 54px -30px rgba(0, 0, 0, 1);
+}
+
+.cardButton {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: left;
+  background: transparent;
+}
+
+.imageWrap {
+  position: relative;
+  display: block;
+  flex: 0 0 auto;
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+.imageWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.newsCard:hover .imageWrap img {
+  transform: scale(1.05);
+}
+
+.zoom {
+  position: absolute;
+  right: 0.9rem;
+  bottom: 0.9rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(8, 9, 13, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: var(--color-text-primary);
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.zoom svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+
+.newsCard:hover .zoom,
+.cardButton:focus-visible .zoom {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cardBody {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0.6rem;
+  padding: 1.4rem 1.5rem 1.6rem;
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.cardTag {
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-pill);
+  background: rgba(196, 20, 53, 0.2);
+  border: 1px solid rgba(196, 20, 53, 0.45);
+  color: #ffc4cf;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.cardDate {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.06em;
+}
+
+.cardTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--color-text-primary);
+  line-height: 1.3;
+}
+
+.cardExcerpt {
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 0.93rem;
+  line-height: 1.6;
+}
+
+.control {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(8, 9, 13, 0.6);
+  color: var(--color-text-primary);
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.control svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.control:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  padding: clamp(1rem, 4vw, 3rem);
+  background: rgba(4, 5, 8, 0.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: fadeIn 200ms ease;
+}
+
+.modal {
+  position: relative;
+  width: min(100%, 720px);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: var(--radius-lg);
+  background: var(--color-background-secondary);
+  border: 1px solid var(--color-border-strong);
+  box-shadow: var(--shadow-card);
+  animation: modalIn 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.modalImage {
+  width: 100%;
+  max-height: 68vh;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  background: #0a0b10;
+}
+
+.close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(8, 9, 13, 0.8);
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-text-primary);
+}
+
+.close svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.close:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.modalFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 0.35rem 0.35rem;
+}
+
+.modalTitle {
+  margin: 0.5rem 0 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.modalNav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 980px) {
+  .newsContainer {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 620px) {
+  .newsContainer {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+  }
+
+  .imageWrap {
+    height: 220px;
+  }
+}
