@@ -21,9 +21,10 @@
 
 .sectionHeader {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 2.5rem;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.25rem;
   margin-bottom: 2.75rem;
 }
 
@@ -40,10 +41,6 @@
   margin: 0.75rem 0 0;
 }
 
-.subtitle {
-  max-width: 42ch;
-  color: var(--color-text-secondary);
-}
 
 .accordion {
   display: flex;
@@ -210,39 +207,28 @@
 }
 
 .panelInner {
-  display: grid;
-  grid-template-columns: 220px minmax(0, 1fr);
-  gap: 1.75rem;
-  padding: 0 1.75rem 1.75rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 1.5rem;
-}
-
-.panelImage {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border-radius: var(--radius-md);
-  background: var(--color-surface);
-}
-
-.panelContent {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-  min-width: 0;
+  gap: 1.5rem;
+  padding: 1.5rem 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+
+
 .description {
-  color: var(--color-text-secondary);
+  width: 100%;
+  margin-bottom: 1.5rem;
+  color: rgba(255, 255, 255, 0.86);
   font-size: 0.98rem;
   line-height: 1.6;
 }
 
 .metaList {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
+  width: 100%;
 }
 
 .metaItem {
@@ -254,15 +240,16 @@
 }
 
 .metaLabel {
-  font-size: 0.66rem;
-  letter-spacing: 0.16em;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-text-muted);
 }
 
 .metaValue {
   font-size: 0.92rem;
-  color: var(--color-text-primary);
+  font-weight: 500;
+  color: #ffffff;
 }
 
 @keyframes pulseLive {
@@ -292,14 +279,10 @@
   }
 
   .panelInner {
-    grid-template-columns: minmax(0, 1fr);
     gap: 1.25rem;
-    padding: 0 1.35rem 1.5rem;
+    padding: 1.35rem 1.35rem 1.5rem;
   }
 
-  .panelImage {
-    max-width: 260px;
-  }
 
   .metaList {
     grid-template-columns: minmax(0, 1fr);
@@ -323,11 +306,6 @@
     gap: 1.5rem;
   }
 
-  .subtitle {
-    width: 100%;
-    max-width: 100%;
-    text-align: left;
-  }
 
   .accordion {
     width: 100%;

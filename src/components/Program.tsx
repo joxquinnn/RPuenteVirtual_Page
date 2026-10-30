@@ -14,14 +14,8 @@ export default function Program() {
     <section className={styles.section} id="programacion">
       <div className={styles.inner}>
         <header className={styles.sectionHeader}>
-          <div>
-            <span className={styles.eyebrow}>La agenda de la emisora</span>
-            <h2 className={styles.title}>Programación</h2>
-          </div>
-          <p className={styles.subtitle}>
-            Cada bloque con su horario, su locutor y su espacio en la
-            transmisión. Pulsa un programa para desplegarlo.
-          </p>
+          <span className={styles.eyebrow}>La agenda de la emisora</span>
+          <h2 className={styles.title}>Programación</h2>
         </header>
 
         <div className={styles.accordion}>
@@ -72,29 +66,21 @@ export default function Program() {
                   className={`${styles.panel} ${expanded ? styles.panelOpen : ''}`}
                 >
                   <div className={styles.panelInner}>
-                    <img
-                      className={styles.panelImage}
-                      src={program.image}
-                      alt={`Imagen de ${program.name}`}
-                      loading="lazy"
-                    />
-                    <div className={styles.panelContent}>
-                      <p className={styles.description}>{program.description}</p>
-                      <ul className={styles.metaList}>
-                        <li className={styles.metaItem}>
-                          <span className={styles.metaLabel}>Horario</span>
-                          <span className={styles.metaValue}>{program.schedule}</span>
-                        </li>
-                        <li className={styles.metaItem}>
-                          <span className={styles.metaLabel}>Días</span>
-                          <span className={styles.metaValue}>{program.days}</span>
-                        </li>
-                        <li className={styles.metaItem}>
-                          <span className={styles.metaLabel}>Conduce</span>
-                          <span className={styles.metaValue}>{program.host}</span>
-                        </li>
-                      </ul>
-                    </div>
+                    <p className={styles.description}>{program.description}</p>
+                    <ul className={styles.metaList}>
+                      <li className={styles.metaItem}>
+                        <span className={styles.metaLabel}>Horario</span>
+                        <span className={styles.metaValue}>{program.schedule}</span>
+                      </li>
+                      <li className={styles.metaItem}>
+                        <span className={styles.metaLabel}>Días</span>
+                        <span className={styles.metaValue}>{program.days}</span>
+                      </li>
+                      <li className={styles.metaItem}>
+                        <span className={styles.metaLabel}>Conduce</span>
+                        <span className={styles.metaValue}>{program.host}</span>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </article>
