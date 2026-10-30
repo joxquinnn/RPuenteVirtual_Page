@@ -1,12 +1,30 @@
-Ya tenemos la web lista y con las correcciones aplicadas. Ahora quiero guardar esto en el repositorio, pero NO quiero hacer un solo commit gigante. 
+# EJECUCIÓN TÉCNICA OBLIGATORIA — CORRECCIÓN RESPONSIVE EN PROGRAMACIÓN
 
-Por favor, revisa los archivos que hemos modificado y dame la lista exacta de comandos de terminal para hacer commits separados y lógicos. 
+**IMPORTANTE PARA LA IA GENERADORA:** El encabezado de la sección de Programación está rompiendo el diseño en dispositivos móviles. El contenedor que agrupa el título y el texto descriptivo está forzando una distribución en fila, provocando que el texto derecho quede colapsado.
 
-Realiza la cantidad de commits que estimes necesaria, atómicos, para no equiparar muchas funcionalidades en un solo commit.
+## 1. Ajuste del Encabezado en Móviles (`ScheduleSection.module.css` o equivalente)
+- **El problema:** El contenedor superior (título a la izquierda, párrafo a la derecha) mantiene la estructura de escritorio en pantallas pequeñas.
+- **La solución (CSS):**
+  - Localiza el contenedor del encabezado de la sección.
+  - Añade o modifica la regla `@media (max-width: 768px)` para este contenedor.
+  - Obliga a que los elementos se apilen verticalmente y ocupen todo el ancho:
+    ```css
+    @media (max-width: 768px) {
+      .headerContainer /* reemplaza con la clase real del contenedor */ {
+        display: flex;
+        flex-direction: column; /* Apila el título y el texto */
+        align-items: flex-start;
+        gap: 1.5rem;
+      }
+      
+      .headerText /* reemplaza con la clase real del párrafo */ {
+        width: 100%;
+        max-width: 100%;
+        text-align: left;
+      }
+    }
+    ```
 
-Estructúralo más o menos así (adaptado a los archivos reales que tocamos):
-1. Un commit para los ajustes del Hero (`git add ruta/del/hero...` y su commit).
-2. Un commit para el botón y redes de la sección Contacto.
-3. Un commit para el ajuste de altura y mock data de las Cards.
-
-Usa la convención de "Conventional Commits" (ej: feat:, fix:, style:). Dame los comandos en bloques de código listos para copiar y pegar en mi terminal.
+## 2. Revisión del Contenedor General
+- Aprovecha de revisar que las tarjetas de los programas tengan `width: 100%;` en la versión móvil para aprovechar el espacio.
+- Asegúrate de que el padding lateral de la sección en móviles no sea excesivo (un `padding: 2rem 1rem;` suele ser suficiente).
