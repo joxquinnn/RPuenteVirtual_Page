@@ -71,9 +71,7 @@ export default function NewsSection() {
       document.removeEventListener('keydown', onKey)
       document.body.style.overflow = ''
     }
-  }, [lightbox, closeLightbox])
-
-  const current = lightbox !== null ? news[lightbox] : null
+  }, [openIndex, hasGallery, closeModal, goNext, goPrev])
 
   return (
     <section className={styles.section} id="noticias">
@@ -89,42 +87,66 @@ export default function NewsSection() {
         </header>
 
         <div className={styles.newsContainer}>
-          {news.map((item, index) => (
-            <article className={styles.newsCard} key={item.id}>
+          {items.map((item, index) => {
+            const itemImages = getImages(item)
+            const cover = itemImages[0]
+            return (
+              <article className={styles.newsCard} key={item.id}>
                 <button
-                      type="button"
-                      className={styles.cardButton}
-                      onClick={() => setLightbox(index)}
-                      ref={(element) => {
-                        triggerRefs.current[index] = element
-                      }}
-                      aria-label={`Ampliar publicación: ${item.title}`}
+                  type="button"
+                  className={styles.cardButton}
+                  onClick={() => openModal(index)}
+                  ref={(element) => {
+                    triggerRefs.current[index] = element
+                  }}
+                  aria-label={`Ver detalle de la publicación: ${item.title}`}
                 >
-                      <span className={styles.imageWrap}>
-                        <img
-                          src={item.image || FALLBACK_IMAGE}
-                          alt={item.title}
-                          loading="lazy"
-                        />
-                        <span className={styles.zoom} aria-hidden="true">
-                          <svg viewBox="0 0 24 24">
-                            <circle cx="11" cy="11" r="6" />
-                            <path d="M20 20l-4.5-4.5M11 8v6M8 11h6" />
-                          </svg>
-                        </span>
-                      </span>
+                  <span
+                    className={styles.imageWrap}
+                    style={{ '--bg-image': `url("${cover}")` } as CSSProperties}
+                  >
+                    <img src={cover} alt={item.title} loading="lazy" />
 
-                      <span className={styles.cardBody}>
-                        <span className={styles.cardTop}>
-                          <span className={styles.cardTag}>{item.tag}</span>
-                          <span className={styles.cardDate}>{item.date}</span>
-                        </span>
-                        <span className={styles.cardTitle}>{item.title}</span>
-                        <span className={styles.cardExcerpt}>{item.excerpt}</span>
+                    {itemImages.length > 1 && (
+                      <span
+                        className={styles.galleryBadge}
+                        aria-label={`${itemImages.length} imágenes`}
+                      >
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                          <rect x="3" y="5" width="18" height="14" rx="2" />
+                          <circle cx="8.5" cy="10" r="1.5" />
+                          <path d="m21 16-5-5-8 8" />
+                        </svg>
+                        1/{itemImages.length}
                       </span>
-            </button>
-            </article>
-          ))}
+                    )}
+
+                    <span className={styles.zoom} aria-hidden="true">
+                      <svg viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="6" />
+                        <path d="M20 20l-4.5-4.5M11 8v6M8 11h6" />
+                      </svg>
+                    </span>
+                  </span>
+
+                  <span className={styles.cardBody}>
+                    <span className={styles.cardTop}>
+                      <span className={styles.cardTag}>{item.tag}</span>
+                      <span className={styles.cardDate}>{item.date}</span>
+                    </span>
+                    <span className={styles.cardTitle}>{item.title.trim()}</span>
+                    <span className={styles.cardExcerpt}>{item.excerpt}</span>
+                    <span className={styles.cardCta}>
+                      Leer más
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M5 12h14M13 6l6 6-6 6" />
+                      </svg>
+                    </span>
+                  </span>
+                </button>
+              </article>
+            )
+          })}
         </div>
       </div>
 
@@ -133,16 +155,16 @@ export default function NewsSection() {
           className={styles.overlay}
           role="dialog"
           aria-modal="true"
-          aria-label={current.title}
+          aria-label={current.title.trim()}
           onClick={(event) => {
-            if (event.target === event.currentTarget) closeLightbox()
+            if (event.target === event.currentTarget) closeModal()
           }}
         >
           <div className={styles.modal}>
             <button
               type="button"
               className={styles.close}
-              onClick={closeLightbox}
+              onClick={closeModal}
               ref={closeButtonRef}
               aria-label="Cerrar"
             >
@@ -151,45 +173,54 @@ export default function NewsSection() {
               </svg>
             </button>
 
-            <img
-              className={styles.modalImage}
-              src={current.image || FALLBACK_IMAGE}
-              alt={current.title}
-            />
+            {/* Columna izquierda: visual / carrusel */}
+            <div
+              className={styles.modalVisual}
+              style={{ '--bg-image': `url("${images[imageIndex]}")` } as CSSProperties}
+            >
+              <img
+                className={styles.modalImage}
+                src={images[imageIndex]}
+                alt={`${current.title.trim()}${hasGallery ? ` (${imageIndex + 1} de ${images.length})` : ''}`}
+              />
 
-            <div className={styles.modalFooter}>
-              <div>
+              {hasGallery && (
+                <>
+                  <button
+                    type="button"
+                    className={`${styles.control} ${styles.controlPrev}`}
+                    onClick={goPrev}
+                    aria-label="Imagen anterior"
+                  >
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M15 5 8 12l7 7" />
+                    </svg>
+                  </button>
+                  <button
+                    type="button"
+                    className={`${styles.control} ${styles.controlNext}`}
+                    onClick={goNext}
+                    aria-label="Imagen siguiente"
+                  >
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="m9 5 7 7-7 7" />
+                    </svg>
+                  </button>
+                  <span className={styles.counter} aria-live="polite">
+                    {imageIndex + 1} / {images.length}
+                  </span>
+                </>
+              )}
+            </div>
+
+            {/* Columna derecha: información con scroll propio */}
+            <div className={styles.modalInfo}>
+              <div className={styles.cardTop}>
                 <span className={styles.cardTag}>{current.tag}</span>
-                <p className={styles.modalTitle}>{current.title}</p>
+                <span className={styles.cardDate}>{current.date}</span>
               </div>
-              <div className={styles.modalNav}>
-                <button
-                  type="button"
-                  className={styles.control}
-                  onClick={() =>
-                    setLightbox((index) =>
-                      index === null ? index : (index - 1 + news.length) % news.length,
-                    )
-                  }
-                  aria-label="Publicación anterior"
-                >
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M15 5 8 12l7 7" />
-                  </svg>
-                </button>
-                <button
-                  type="button"
-                  className={styles.control}
-                  onClick={() =>
-                    setLightbox((index) => (index === null ? index : (index + 1) % news.length))
-                  }
-                  aria-label="Publicación siguiente"
-                >
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="m9 5 7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
+              <h3 className={styles.modalTitle}>{current.title.trim()}</h3>
+              <p className={styles.modalDescription}>{current.excerpt}</p>
             </div>
           </div>
         </div>
