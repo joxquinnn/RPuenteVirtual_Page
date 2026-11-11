@@ -18,18 +18,22 @@ export default function Program() {
           <h2 className={styles.title}>Programación</h2>
         </header>
 
-        <div className={styles.accordion}>
+        <ol className={styles.timeline}>
           {programs.map((program) => {
             const expanded = expandedId === program.id
             const panelId = `panel-${program.id}`
 
             return (
-              <article
+              <li
                 className={`${styles.item} ${styles[program.accent] ?? ''} ${
                   expanded ? styles.expanded : ''
                 } ${program.live ? styles.live : ''}`}
                 key={program.id}
               >
+                <span className={styles.node} aria-hidden="true">
+                  <span className={styles.nodeCore} />
+                </span>
+
                 <button
                   type="button"
                   className={styles.itemHeader}
@@ -37,31 +41,31 @@ export default function Program() {
                   aria-expanded={expanded}
                   aria-controls={panelId}
                 >
-                  <span className={styles.itemHeaderText}>
-                    <span className={styles.schedule}>
-                      <span className={styles.scheduleTime}>{program.schedule}</span>
-                      <span className={styles.scheduleDays}>{program.days}</span>
+                  <span className={styles.headerMain}>
+                    <span className={styles.titleRow}>
+                      <span className={styles.name}>{program.name}</span>
+
+                      <span className={styles.schedulePill}>{program.schedule}</span>
+
+                      {program.live && (
+                        <span className={styles.liveBadge}>
+                          <span className={styles.liveDot} aria-hidden="true" />
+                          En vivo
+                        </span>
+                      )}
                     </span>
 
-                    <span className={styles.headerText}>
-                      <span className={styles.name}>{program.name}</span>
+                    <span className={styles.subline}>
                       <span className={styles.host}>{program.host}</span>
+                      <span className={styles.sublineDivider} aria-hidden="true" />
+                      <span className={styles.days}>{program.days}</span>
                     </span>
                   </span>
 
-                  <span className={styles.itemHeaderActions}>
-                    {program.live && (
-                      <span className={styles.liveBadge}>
-                        <span className={styles.liveDot} aria-hidden="true" />
-                        En vivo
-                      </span>
-                    )}
-
-                    <span className={styles.chevron} aria-hidden="true">
-                      <svg viewBox="0 0 24 24">
-                        <path d="m6 9 6 6 6-6" />
-                      </svg>
-                    </span>
+                  <span className={styles.chevron} aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                      <path d="m6 9 6 6 6-6" />
+                    </svg>
                   </span>
                 </button>
 
@@ -70,37 +74,39 @@ export default function Program() {
                   className={`${styles.panel} ${expanded ? styles.panelOpen : ''}`}
                 >
                   <div className={styles.panelInner}>
-                    <img
-                      className={styles.panelImage}
-                      src={program.image}
-                      alt={`Imagen de ${program.name}`}
-                      loading="lazy"
-                    />
+                    <div className={styles.panelBody}>
+                      <img
+                        className={styles.avatar}
+                        src={program.image}
+                        alt={`Retrato de ${program.name}`}
+                        loading="lazy"
+                      />
 
-                    <div className={styles.panelContent}>
+                      <div className={styles.panelContent}>
                       <p className={styles.description}>{program.description}</p>
 
-                      <ul className={styles.metaList}>
-                        <li className={styles.metaItem}>
-                          <span className={styles.metaLabel}>Conduce</span>
-                          <span className={styles.metaValue}>{program.host}</span>
-                        </li>
-                        <li className={styles.metaItem}>
-                          <span className={styles.metaLabel}>Días</span>
-                          <span className={styles.metaValue}>{program.days}</span>
-                        </li>
-                        <li className={styles.metaItem}>
-                          <span className={styles.metaLabel}>Horario</span>
-                          <span className={styles.metaValue}>{program.schedule}</span>
-                        </li>
-                      </ul>
+                      <dl className={styles.metaList}>
+                        <div className={styles.metaItem}>
+                          <dt className={styles.metaLabel}>Conduce</dt>
+                          <dd className={styles.metaValue}>{program.host}</dd>
+                        </div>
+                        <div className={styles.metaItem}>
+                          <dt className={styles.metaLabel}>Días</dt>
+                          <dd className={styles.metaValue}>{program.days}</dd>
+                        </div>
+                        <div className={styles.metaItem}>
+                          <dt className={styles.metaLabel}>Horario</dt>
+                          <dd className={styles.metaValue}>{program.schedule}</dd>
+                        </div>
+                      </dl>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </article>
+              </li>
             )
           })}
-        </div>
+        </ol>
       </div>
     </section>
   )
