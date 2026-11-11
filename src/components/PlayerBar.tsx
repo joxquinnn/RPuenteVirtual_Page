@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { STREAM_URL } from '../data/stream'
-import { station } from '../data/station'
+import { STREAM_URL } from '../types/stream'
+import { station } from '../types/station'
 import styles from '../styles/PlayerBar.module.css'
 
 const BAR_COUNT = 48

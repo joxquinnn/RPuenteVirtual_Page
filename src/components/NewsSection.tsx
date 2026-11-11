@@ -1,41 +1,67 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { news } from '../data/news'
+import type { CSSProperties } from 'react'
+import { news } from '../types/news'
+import type { NewsItem } from '../types/news'
 import styles from '../styles/NewsSection.module.css'
 
 const FALLBACK_IMAGE = '/images/news-placeholder.svg'
 
+// Si el item define `images`, se usan todas; si no, se usa la imagen única `image`.
+function getImages(item: NewsItem): string[] {
+  if (item.images && item.images.length > 0) return item.images
+  return [item.image || FALLBACK_IMAGE]
+}
+
 export default function NewsSection() {
-  const [lightbox, setLightbox] = useState<number | null>(null)
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const [imageIndex, setImageIndex] = useState(0)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
   const triggerRefs = useRef<(HTMLButtonElement | null)[]>([])
 
-  const closeLightbox = useCallback(() => {
-    setLightbox((current) => {
-      if (current !== null) {
-        triggerRefs.current[current]?.focus()
+  const items = news
+  const current = openIndex !== null ? items[openIndex] : null
+  const images = current ? getImages(current) : []
+  const hasGallery = images.length > 1
+
+  const openModal = (index: number) => {
+    setImageIndex(0)
+    setOpenIndex(index)
+  }
+
+  const closeModal = useCallback(() => {
+    setOpenIndex((currentIndex) => {
+      if (currentIndex !== null) {
+        triggerRefs.current[currentIndex]?.focus()
       }
       return null
     })
   }, [])
 
+  const goPrev = useCallback(() => {
+    setImageIndex((i) => (i - 1 + images.length) % images.length)
+  }, [images.length])
+
+  const goNext = useCallback(() => {
+    setImageIndex((i) => (i + 1) % images.length)
+  }, [images.length])
+
   useEffect(() => {
-    if (lightbox === null) return
+    if (openIndex === null) return
     closeButtonRef.current?.focus()
 
     const onKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         event.preventDefault()
-        closeLightbox()
+        closeModal()
       }
+      if (!hasGallery) return
       if (event.key === 'ArrowRight') {
         event.preventDefault()
-        setLightbox((current) => (current === null ? current : (current + 1) % news.length))
+        goNext()
       }
       if (event.key === 'ArrowLeft') {
         event.preventDefault()
-        setLightbox((current) =>
-          current === null ? current : (current - 1 + news.length) % news.length,
-        )
+        goPrev()
       }
     }
 

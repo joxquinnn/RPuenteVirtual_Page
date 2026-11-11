@@ -1,4 +1,4 @@
-import { sponsors } from '../data/sponsors'
+import { sponsors } from '../types/sponsors'
 import styles from '../styles/SponsorFooter.module.css'
 
 export default function SponsorFooter() {

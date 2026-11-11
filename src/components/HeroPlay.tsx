@@ -1,4 +1,4 @@
-import { station } from '../data/station'
+import { station } from '../types/station'
 import styles from '../styles/HeroPlay.module.css'
 
 export default function HeroPlay() {

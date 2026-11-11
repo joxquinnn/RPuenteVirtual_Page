@@ -8,41 +8,35 @@ export type SocialLink = {
 export const station = {
   name: 'Radio Puente Virtual',
   slogan: 'El medio que nos une',
-  email: '',
+  email: 'radiopuentevirtual@gmail.com',
   address: 'Dirección por confirmar',
-  scheduleNote: 'Emisión continua con programación en vivo.',
+  scheduleNote: '+569 7863 6686',
 }
 
 export const socialLinks: SocialLink[] = [
   {
     id: 'instagram',
     label: 'Instagram',
-    href: '',
+    href: 'https://www.instagram.com/puentevirtualdeportes/',
     icon: 'instagram',
   },
   {
     id: 'facebook',
     label: 'Facebook',
-    href: '',
+    href: 'https://www.facebook.com/p/Radio-Puente-Virtual-61552443606762/?locale=es_LA',
     icon: 'facebook',
   },
   {
     id: 'youtube',
     label: 'YouTube',
-    href: '',
+    href: 'https://www.youtube.com/@RadioPuenteVirtual-g9x',
     icon: 'youtube',
   },
   {
     id: 'tiktok',
     label: 'TikTok',
-    href: '',
+    href: 'https://www.tiktok.com/@radiopuentevirtual',
     icon: 'tiktok',
-  },
-  {
-    id: 'x',
-    label: 'X',
-    href: '',
-    icon: 'x',
   },
 ]
 

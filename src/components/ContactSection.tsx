@@ -1,4 +1,4 @@
-import { socialLinks, station } from '../data/station'
+import { socialLinks, station } from '../types/station'
 import styles from '../styles/ContactSection.module.css'
 
 const icons: Record<string, string> = {

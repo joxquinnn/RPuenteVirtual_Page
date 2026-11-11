@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { programs } from '../data/programs'
+import { programs } from '../types/programs'
 import styles from '../styles/Program.module.css'
 
 export default function Program() {

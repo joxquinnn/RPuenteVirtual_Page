@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import logoNavbar from '../constants/logo_Navbar.png'
-import { navLinks, station } from '../data/station'
+import { navLinks, station } from '../types/station'
 import styles from '../styles/Navbar.module.css'
 
 export default function Navbar() {
