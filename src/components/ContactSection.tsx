@@ -76,11 +76,11 @@ export default function ContactSection() {
                 <li className={styles.infoItem}>
                   <span className={styles.infoLabel}>Correo</span>
                   <span className={styles.infoValue}>
-                    {email || 'Correo institucional por confirmar'}
+                    {email || 'radiopuentevirtual@gmail.com'}
                   </span>
                 </li>
                 <li className={styles.infoItem}>
-                  <span className={styles.infoLabel}>Transmisión</span>
+                  <span className={styles.infoLabel}>Teléfono</span>
                   <span className={styles.infoValue}>{station.scheduleNote}</span>
                 </li>
               </ul>
