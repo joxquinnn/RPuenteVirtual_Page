@@ -33,6 +33,13 @@
   --color-surface-raised: #1c2029;
   --color-black-card: #0b0d12;
 
+  /* Estándar de tarjetas (Glassmorphism) */
+  --card-bg: rgba(20, 20, 20, 0.65);
+  --card-bg-hover: rgba(28, 28, 30, 0.78);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --card-border-top: rgba(255, 255, 255, 0.15);
+  --card-blur: 10px;
+
   /* Gradientes */
   --gradient-accent: linear-gradient(135deg, #c41435 0%, #690f27 100%);
 
@@ -51,6 +58,7 @@
   --radius-sm: 8px;
   --radius-md: 14px;
   --radius-lg: 22px;
+  --radius-card: 12px;
   --radius-pill: 999px;
   --transition-fast: 180ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-base: 320ms cubic-bezier(0.4, 0, 0.2, 1);

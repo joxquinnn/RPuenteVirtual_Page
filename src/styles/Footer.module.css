@@ -1,278 +1,128 @@
-/* ==================== Footer - Optimizado para Mobile ==================== */
+/* ============================================================
+   JKDBASE — Footer modular (React + CSS Modules)
+   ============================================================ */
 
+/* ---------- Tokens de diseño ---------- */
 .footer {
-  --neon-cyan: #00f0ff;
-  --neon-purple: #bf00ff;
-  --neon-blue: #4d4dff;
-  --neon-pink: #ff00ff;
-  --gradient-main: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-purple) 100%);
-  --footer-gradient-accent: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-pink) 100%);
-  --bg-dark: #0f0f1e;
-  --bg-darker: #0a0a15;
-  --text-bright: #f0f0ff;
-  --text-dim: #b8b8d4;
-  --text-darker: #8888aa;
+  --font-display: 'Archivo Black', 'Anton', 'Arial Black', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Helvetica Neue', sans-serif;
+
+  --paper: #f4f2ee;
+  --ink: #000000;
+  --purple: #7b2ff7;
+  --cyan: #00d9ff;
+
+  --border-thick: 3px solid var(--ink);
+  --transition-fast: 0.15s ease;
 }
 
+/* ---------- Footer - Brutalista ---------- */
 .footer {
-  width: 100%;
   position: relative;
+  z-index: 2;
+  margin-top: 0;
+}
+
+.darkBar {
+  background: var(--ink);
+  color: var(--paper);
+  border-top: var(--border-thick);
 }
 
 .container {
-  max-width: 1100px;
+  max-width: 1240px;
   margin: 0 auto;
-}
-
-/* ==================== BARRA OSCURA (MEJORADA) ==================== */
-.darkBar {
-  background: var(--color-background);
-  padding: 35px 5%;
-  color: white;
-  position: relative;
-  overflow: hidden;
+  padding: 28px 5%;
 }
 
 .darkBarContent {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  position: relative;
-  z-index: 2;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 .copyrightGroup {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 14px;
   font-size: 0.85rem;
-  color: var(--text-darker);
+  font-family: var(--font-body);
 }
 
 .whiteText {
-  color: var(--text-bright);
-  font-weight: 600;
-  transition: color 0.3s ease;
-}
-
-.whiteText:hover {
-  color: var(--neon-cyan);
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  color: var(--cyan);
 }
 
 .dotSeparator {
-  width: 5px;
-  height: 5px;
-  background: var(--gradient-main);
+  width: 8px;
+  height: 8px;
+  background: var(--purple);
   border-radius: 50%;
-  box-shadow: 0 0 12px rgba(0, 240, 255, 0.6), 0 0 20px rgba(191, 0, 255, 0.4);
-  animation: pulse 2s infinite ease-in-out;
 }
 
-@keyframes pulse {
-  0%, 100% { 
-    opacity: 1; 
-    transform: scale(1);
-    box-shadow: 0 0 12px rgba(0, 240, 255, 0.6), 0 0 20px rgba(191, 0, 255, 0.4);
-  }
-  50% { 
-    opacity: 0.6;
-    transform: scale(1.3);
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.8), 0 0 30px rgba(191, 0, 255, 0.6);
-  }
+.legalText {
+  color: rgba(244, 242, 238, 0.7);
 }
 
 .developerBox {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 5px;
+  align-items: center;
+  gap: 12px;
 }
 
 .devLabel {
   display: flex;
   align-items: center;
-  gap: 10px;
-}
-
-.line {
-  width: 20px;
-  height: 2px;
-  background: var(--gradient-main);
-  transition: all 0.4s ease;
-  box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
-}
-
-.text {
-  font-size: 0.65rem;
+  gap: 8px;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  letter-spacing: 3px;
-  color: var(--text-darker);
-  font-weight: 300;
+  color: rgba(244, 242, 238, 0.65);
+}
+
+.devLabel .line {
+  display: block;
+  width: 28px;
+  height: 3px;
+  background: var(--cyan);
 }
 
 .devLink {
-  text-decoration: none;
-  font-weight: 800; 
-  font-size: 1.2rem;
-  letter-spacing: 2px;
-  transition: all 0.4s ease;
   position: relative;
-  display: inline-block;
-  background: linear-gradient(90deg, 
-    var(--neon-cyan) 0%, 
-    var(--neon-blue) 20%,
-    var(--neon-purple) 40%, 
-    var(--neon-pink) 60%,
-    var(--neon-purple) 80%,
-    var(--neon-cyan) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  background-size: 300% 100%;
-  animation: gradientFlow 4s ease-in-out infinite;
-}
-
-@keyframes gradientFlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.devLink::after {
-  content: '';
-  position: absolute;
-  bottom: -3px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--footer-gradient-accent);
-  transition: width 0.4s ease;
-  box-shadow: 0 0 15px rgba(191, 0, 255, 0.7);
-}
-
-.developerBox:hover .line {
-  width: 50px;
-  background: var(--footer-gradient-accent);
-  box-shadow: 0 0 20px rgba(191, 0, 255, 0.8), 0 0 30px rgba(255, 0, 255, 0.5);
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--paper);
+  transition: color var(--transition-fast);
 }
 
 .devLink:hover {
-  letter-spacing: 4px;
-  text-shadow: 0 0 20px rgba(0, 240, 255, 0.4), 0 0 30px rgba(191, 0, 255, 0.3);
-}
-
-.devLink:hover::after {
-  width: 100%;
+  color: var(--cyan);
 }
 
 .accent {
-  background: var(--gradient-main);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.4));
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: var(--purple);
+  border-radius: 50%;
+  margin-left: 4px;
 }
 
-/* ==================== RESPONSIVO MOBILE ==================== */
-@media (max-width: 968px) {
-  .footerGrid {
-    grid-template-columns: 1fr;
-    gap: 50px;
-  }
-  
-  .footerGrid .column:first-child,
-  .footerGrid .column:last-child {
-    align-items: center;
-    text-align: center;
-  }
-  
-  .columnTitle::after {
-    left: 50% !important;
-    right: auto !important;
-    transform: translateX(-50%);
-  }
-  
-  /* Resetear efectos de hover en móvil */
-  .footerGrid .column:first-child .linkList a::before,
-  .footerGrid .column:last-child .linkList a::after {
-    display: none;
-  }
-  
-  .footerGrid .column:first-child .linkList a:hover,
-  .footerGrid .column:last-child .linkList a:hover {
-    transform: translateX(0);
-  }
-
+@media (max-width: 640px) {
   .darkBarContent {
     flex-direction: column;
-    gap: 25px;
-    text-align: center;
+    align-items: flex-start;
   }
-  
-  .copyrightGroup {
-    flex-direction: column;
-    gap: 8px;
-  }
-  
-  .dotSeparator {
-    display: none;
-  }
-  
+
   .developerBox {
-    align-items: center;
-  }
-  
-  .lightSection {
-    padding: 50px 5%;
-  }
-  
-  .darkBar {
-    padding: 30px 5%;
-  }
-
-  .devLink {
-    font-size: 1rem;
-    letter-spacing: 1px;
-  }
-  
-  .logoRing {
-    width: 90px;
-    height: 90px;
-  }
-  
-  .grayLogo {
-    width: 55px;
-  }
-  
-  .institutionName {
-    font-size: 1rem;
-  }
-  
-  .institutionName span {
-    font-size: 0.7rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .linkList a {
-    font-size: 0.85rem;
-  }
-  
-  .columnTitle {
-    font-size: 0.75rem;
-    letter-spacing: 2px;
-  }
-  
-  .copyrightGroup {
-    font-size: 0.75rem;
-  }
-  
-  .devLink {
-    font-size: 0.95rem;
-  }
-  
-  .text {
-    font-size: 0.6rem;
-    letter-spacing: 2px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
   }
 }
