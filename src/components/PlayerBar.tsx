@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { STREAM_URL } from '../types/stream'
 import { station } from '../types/station'
 import styles from '../styles/PlayerBar.module.css'
@@ -43,7 +43,16 @@ export default function PlayerBar() {
   const audioRef = useRef<HTMLAudioElement>(null)
   const [playing, setPlaying] = useState(false)
   const [notice, setNotice] = useState(false)
+  const [volume, setVolume] = useState(0.7)
+  const [muted, setMuted] = useState(false)
   const ready = Boolean(STREAM_URL)
+
+  useEffect(() => {
+    const audio = audioRef.current
+    if (!audio) return
+    audio.volume = volume
+    audio.muted = muted
+  }, [volume, muted, ready])
 
   const toggle = async () => {
     if (!ready) {
@@ -64,6 +73,9 @@ export default function PlayerBar() {
       }
     }
   }
+
+  const silenced = muted || volume === 0
+  const displayVolume = silenced ? 0 : volume
 
   return (
     <div className={styles.playerBar} role="region" aria-label="Reproductor de Radio Puente Virtual">
@@ -107,14 +119,60 @@ export default function PlayerBar() {
             )}
           </button>
 
-          <span className={styles.volume} aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path d="M4 9v6h4l5 4V5L8 9H4Z" />
-            </svg>
-            <span className={styles.volumeTrack}>
-              <span className={styles.volumeFill} />
-            </span>
-          </span>
+          <div className={styles.volume}>
+            <button
+              type="button"
+              className={styles.muteButton}
+              onClick={() => {
+                if (volume === 0) {
+                  setVolume(0.7)
+                  setMuted(false)
+                } else {
+                  setMuted((current) => !current)
+                }
+              }}
+              aria-label={silenced ? 'Activar sonido' : 'Silenciar'}
+              aria-pressed={silenced}
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 9v6h4l5 4V5L8 9H4Z" />
+                {silenced ? (
+                  <path
+                    d="M16.5 9.5l5 5M21.5 9.5l-5 5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                  />
+                ) : (
+                  <path
+                    d="M16 8.5a5 5 0 0 1 0 7"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                  />
+                )}
+              </svg>
+            </button>
+
+            <input
+              type="range"
+              className={styles.volumeSlider}
+              min={0}
+              max={1}
+              step={0.01}
+              value={displayVolume}
+              onChange={(event) => {
+                const next = Number(event.target.value)
+                setVolume(next)
+                setMuted(next === 0)
+              }}
+              aria-label="Volumen"
+              aria-valuetext={`${Math.round(displayVolume * 100)}%`}
+              style={{ '--fill': `${displayVolume * 100}%` } as CSSProperties}
+            />
+          </div>
         </div>
       </div>
 
