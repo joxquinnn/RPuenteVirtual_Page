@@ -319,9 +319,45 @@
   flex: 1;
 }
 
+/* Conductores ------------------------------------------------ */
+
+.hostsBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.hostList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+
+.hostCard {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-width: 0;
+  padding: 0.7rem 0.95rem 0.7rem 0.7rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  transition:
+    border-color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.hostCard:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+}
+
 .avatar {
-  width: 84px;
-  height: 84px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid rgba(255, 255, 255, 0.12);
@@ -334,6 +370,30 @@
   border-color: rgba(255, 255, 255, 0.2);
 }
 
+.avatarFallback {
+  display: grid;
+  place-items: center;
+  font-family: var(--heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--color-text-primary);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.03)
+  );
+}
+
+.hostName {
+  min-width: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--color-text-primary);
+  overflow-wrap: anywhere;
+}
+
 .description {
   color: var(--color-text-secondary);
   font-size: 0.96rem;
@@ -342,7 +402,7 @@
 
 .metaList {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
   margin: 0;
 }
@@ -424,8 +484,16 @@
   }
 
   .avatar {
-    width: 64px;
-    height: 64px;
+    width: 52px;
+    height: 52px;
+  }
+
+  .avatarFallback {
+    font-size: 1rem;
+  }
+
+  .hostList {
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
   }
 
   .metaList {

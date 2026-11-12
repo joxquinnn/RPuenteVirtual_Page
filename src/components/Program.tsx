@@ -1,6 +1,44 @@
 import { useState } from 'react'
-import { programs } from '../types/programs'
+import { programs, type Host } from '../types/programs'
 import styles from '../styles/Program.module.css'
+
+/** "A", "A y B", "A, B y C" */
+function joinNames(names: string[]) {
+  if (names.length <= 1) return names[0] ?? ''
+  return `${names.slice(0, -1).join(', ')} y ${names[names.length - 1]}`
+}
+
+function initials(name: string) {
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((word) => word[0])
+    .join('')
+    .toUpperCase()
+}
+
+function HostAvatar({ host }: { host: Host }) {
+  const [failed, setFailed] = useState(false)
+
+  if (!host.image || failed) {
+    return (
+      <span className={`${styles.avatar} ${styles.avatarFallback}`} aria-hidden="true">
+        {initials(host.name)}
+      </span>
+    )
+  }
+
+  return (
+    <img
+      className={styles.avatar}
+      src={host.image}
+      alt=""
+      loading="lazy"
+      onError={() => setFailed(true)}
+    />
+  )
+}
 
 export default function Program() {
   const liveProgram = programs.find((program) => program.live) ?? programs[0]
@@ -22,6 +60,8 @@ export default function Program() {
           {programs.map((program) => {
             const expanded = expandedId === program.id
             const panelId = `panel-${program.id}`
+            const hostNames = joinNames(program.hosts.map((host) => host.name))
+            const hostsLabel = program.hosts.length > 1 ? 'Conducen' : 'Conduce'
 
             return (
               <li
@@ -56,7 +96,7 @@ export default function Program() {
                     </span>
 
                     <span className={styles.subline}>
-                      <span className={styles.host}>{program.host}</span>
+                      <span className={styles.host}>{hostNames}</span>
                       <span className={styles.sublineDivider} aria-hidden="true" />
                       <span className={styles.days}>{program.days}</span>
                     </span>
@@ -75,30 +115,31 @@ export default function Program() {
                 >
                   <div className={styles.panelInner}>
                     <div className={styles.panelBody}>
-                      <img
-                        className={styles.avatar}
-                        src={program.image}
-                        alt={`Retrato de ${program.name}`}
-                        loading="lazy"
-                      />
-
                       <div className={styles.panelContent}>
-                      <p className={styles.description}>{program.description}</p>
+                        <p className={styles.description}>{program.description}</p>
 
-                      <dl className={styles.metaList}>
-                        <div className={styles.metaItem}>
-                          <dt className={styles.metaLabel}>Conduce</dt>
-                          <dd className={styles.metaValue}>{program.host}</dd>
+                        <div className={styles.hostsBlock}>
+                          <span className={styles.metaLabel}>{hostsLabel}</span>
+                          <ul className={styles.hostList}>
+                            {program.hosts.map((host) => (
+                              <li className={styles.hostCard} key={host.name}>
+                                <HostAvatar host={host} />
+                                <span className={styles.hostName}>{host.name}</span>
+                              </li>
+                            ))}
+                          </ul>
                         </div>
-                        <div className={styles.metaItem}>
-                          <dt className={styles.metaLabel}>Días</dt>
-                          <dd className={styles.metaValue}>{program.days}</dd>
-                        </div>
-                        <div className={styles.metaItem}>
-                          <dt className={styles.metaLabel}>Horario</dt>
-                          <dd className={styles.metaValue}>{program.schedule}</dd>
-                        </div>
-                      </dl>
+
+                        <dl className={styles.metaList}>
+                          <div className={styles.metaItem}>
+                            <dt className={styles.metaLabel}>Días</dt>
+                            <dd className={styles.metaValue}>{program.days}</dd>
+                          </div>
+                          <div className={styles.metaItem}>
+                            <dt className={styles.metaLabel}>Horario</dt>
+                            <dd className={styles.metaValue}>{program.schedule}</dd>
+                          </div>
+                        </dl>
                       </div>
                     </div>
                   </div>
