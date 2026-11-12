@@ -179,7 +179,77 @@
     padding-top: 112px;
   }
 
+  /* Franja superior: una sola línea, más compacta */
+  .topline {
+    gap: 0.7rem;
+    margin-bottom: 1.35rem;
+  }
+
+  .eyebrow {
+    font-size: clamp(0.56rem, 2.6vw, 0.68rem);
+    letter-spacing: 0.2em;
+    white-space: nowrap;
+  }
+
+  .eyebrowDivider {
+    width: 22px;
+  }
+
+  /* Título: ocupa todo el ancho disponible para ganar impacto.
+     Si lo quieres más grande o más chico, cambia el divisor (3.9). */
+  .title {
+    line-height: 0.84;
+  }
+
+  .radio {
+    font-size: clamp(1.25rem, 6.4vw, 1.9rem);
+    font-weight: 700;
+    letter-spacing: 0.5em;
+    margin-left: 0.5em;
+    margin-bottom: 0.15em;
+  }
+
+  .puente,
   .virtual {
-    -webkit-text-stroke-width: 1.5px;
+    font-size: calc((100vw - 2rem) / 3.9);
+    margin-left: -0.04em;
+  }
+
+  .puente {
+    text-shadow: 0 18px 44px rgba(53, 10, 25, 0.7);
+  }
+
+  .virtual {
+    -webkit-text-stroke-width: 2px;
+    text-shadow: 0 18px 44px rgba(53, 10, 25, 0.55);
+  }
+
+  /* Slogan: más peso y una línea de acento arriba */
+  .slogan {
+    margin-top: 1.6rem;
+    font-size: clamp(0.88rem, 4.2vw, 1.05rem);
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    color: #fff;
+  }
+
+  .slogan::before {
+    content: '';
+    display: block;
+    width: 44px;
+    height: 2px;
+    margin: 0 auto 1.1rem;
+    background: var(--color-burgundy-deep);
+  }
+
+  /* Más profundidad en el fondo */
+  .pattern {
+    opacity: 1;
+  }
+
+  .patternAlt {
+    background:
+      radial-gradient(circle at 92% 6%, rgba(53, 10, 25, 0.7) 0%, transparent 50%),
+      radial-gradient(circle at 0% 100%, rgba(105, 15, 39, 0.75) 0%, transparent 52%);
   }
 }
