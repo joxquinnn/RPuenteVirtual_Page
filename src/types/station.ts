@@ -9,7 +9,7 @@ export const station = {
   name: 'Radio Puente Virtual',
   slogan: 'El medio que nos une',
   email: 'radiopuentevirtual@gmail.com',
-  address: 'Dirección por confirmar',
+  address: 'José Joaquín Pérez 0667, Nueva Imperial',
   scheduleNote: '+569 7863 6686',
 }
 
