@@ -1,6 +1,19 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { programs, type Host } from '../types/programs'
+import { formatDays, formatSchedule, getProgramStatus } from '../types/programSchedule'
 import styles from '../styles/Program.module.css'
+
+/** Hora actual, refrescada cada 30 s para que el "En vivo" cambie solo cuando empieza/termina un programa. */
+function useNow(intervalMs = 30_000) {
+  const [now, setNow] = useState(() => new Date())
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setNow(new Date()), intervalMs)
+    return () => window.clearInterval(timer)
+  }, [intervalMs])
+
+  return now
+}
 
 /** "A", "A y B", "A, B y C" */
 function joinNames(names: string[]) {
@@ -41,11 +54,20 @@ function HostAvatar({ host }: { host: Host }) {
 }
 
 export default function Program() {
-  const liveProgram = programs.find((program) => program.live) ?? programs[0]
-  const [expandedId, setExpandedId] = useState<string | null>(liveProgram.id)
+  const now = useNow()
+  const { liveId, nextId } = getProgramStatus(programs, now)
+
+  // Se despliega el que está al aire; si no hay ninguno, el próximo en comenzar.
+  const autoExpandId = liveId ?? nextId
+
+  // Elección manual del oyente, atada al programa en vivo con el que se hizo.
+  // Cuando el programa en vivo cambia, `forId` deja de coincidir y se vuelve al automático
+  // (se calcula al renderizar, sin useEffect ni setState extra).
+  const [manual, setManual] = useState<{ forId: string | null; id: string | null } | null>(null)
+  const expandedId = manual && manual.forId === autoExpandId ? manual.id : autoExpandId
 
   const toggleAccordion = (id: string) => {
-    setExpandedId((current) => (current === id ? null : id))
+    setManual({ forId: autoExpandId, id: expandedId === id ? null : id })
   }
 
   return (
@@ -59,6 +81,7 @@ export default function Program() {
         <ol className={styles.timeline}>
           {programs.map((program) => {
             const expanded = expandedId === program.id
+            const isLive = program.id === liveId
             const panelId = `panel-${program.id}`
             const hostNames = joinNames(program.hosts.map((host) => host.name))
             const hostsLabel = program.hosts.length > 1 ? 'Conducen' : 'Conduce'
@@ -67,7 +90,7 @@ export default function Program() {
               <li
                 className={`${styles.item} ${styles[program.accent] ?? ''} ${
                   expanded ? styles.expanded : ''
-                } ${program.live ? styles.live : ''}`}
+                } ${isLive ? styles.live : ''}`}
                 key={program.id}
               >
                 <span className={styles.node} aria-hidden="true">
@@ -85,9 +108,9 @@ export default function Program() {
                     <span className={styles.titleRow}>
                       <span className={styles.name}>{program.name}</span>
 
-                      <span className={styles.schedulePill}>{program.schedule}</span>
+                      <span className={styles.schedulePill}>{formatSchedule(program)}</span>
 
-                      {program.live && (
+                      {isLive && (
                         <span className={styles.liveBadge}>
                           <span className={styles.liveDot} aria-hidden="true" />
                           En vivo
@@ -98,7 +121,7 @@ export default function Program() {
                     <span className={styles.subline}>
                       <span className={styles.host}>{hostNames}</span>
                       <span className={styles.sublineDivider} aria-hidden="true" />
-                      <span className={styles.days}>{program.days}</span>
+                      <span className={styles.days}>{formatDays(program.days)}</span>
                     </span>
                   </span>
 
@@ -133,11 +156,11 @@ export default function Program() {
                         <dl className={styles.metaList}>
                           <div className={styles.metaItem}>
                             <dt className={styles.metaLabel}>Días</dt>
-                            <dd className={styles.metaValue}>{program.days}</dd>
+                            <dd className={styles.metaValue}>{formatDays(program.days)}</dd>
                           </div>
                           <div className={styles.metaItem}>
                             <dt className={styles.metaLabel}>Horario</dt>
-                            <dd className={styles.metaValue}>{program.schedule}</dd>
+                            <dd className={styles.metaValue}>{formatSchedule(program)}</dd>
                           </div>
                         </dl>
                       </div>
