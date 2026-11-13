@@ -2,13 +2,24 @@ export type Sponsor = {
   id: string
   name: string
   image: string
+  width: number
+  height: number
 }
 
 export const sponsors: Sponsor[] = [
-  { id: 'sponsor-01', name: 'Patrocinador 01', image: '/images/sponsor-01.svg' },
-  { id: 'sponsor-02', name: 'Patrocinador 02', image: '/images/sponsor-02.svg' },
-  { id: 'sponsor-03', name: 'Patrocinador 03', image: '/images/sponsor-03.svg' },
-  { id: 'sponsor-04', name: 'Patrocinador 04', image: '/images/sponsor-04.svg' },
-  { id: 'sponsor-05', name: 'Patrocinador 05', image: '/images/sponsor-05.svg' },
-  { id: 'sponsor-06', name: 'Patrocinador 06', image: '/images/sponsor-06.svg' },
+  { id: 'calafa-sports', name: 'Calafa Sports', image: '/images/sponsors/calafa-sports.webp', width: 1600, height: 235 },
+  { id: 'carnes-don-hector', name: 'Carnes Don Héctor', image: '/images/sponsors/carnes-don-hector.webp', width: 1600, height: 167 },
+  { id: 'servitec', name: 'Servitec', image: '/images/sponsors/servitec.webp', width: 1600, height: 250 },
+  { id: 'panaderia-san-cristobal', name: 'Panadería San Cristóbal', image: '/images/sponsors/panaderia-san-cristobal.webp', width: 1600, height: 192 },
+  { id: 'jkdstudio', name: 'JKDStudio - Crafting Digital Experience', image: '/images/sponsors/jkd-studio.webp', width: 1600, height: 192 },
+  { id: 'mirident', name: 'Clínica Dental Mirident', image: '/images/sponsors/mirident.webp', width: 1600, height: 202 },
+  { id: 'la-ballica', name: 'La Ballica', image: '/images/sponsors/la-ballica.webp', width: 1600, height: 181 },
+  { id: 'cute-woman-studio', name: 'Cute Woman Studio', image: '/images/sponsors/cute-woman-studio.webp', width: 1600, height: 240 },
+  { id: 'el-gitano', name: 'El Gitano', image: '/images/sponsors/el-gitano.webp', width: 1600, height: 180 },
+  { id: 'grupo-del-valle', name: 'Grupo del Valle', image: '/images/sponsors/grupo-del-valle.webp', width: 1600, height: 178 },
+  { id: 'leo-sport', name: 'Leo Sport', image: '/images/sponsors/leo-sport.webp', width: 1536, height: 312 },
+  { id: 'toledo-servicios-funerarios', name: 'Toledo Servicios Funerarios', image: '/images/sponsors/toledo-servicios-funerarios.webp', width: 1600, height: 216 },
+  { id: 'cesar-sepulveda', name: 'César Sepúlveda, Alcalde', image: '/images/sponsors/cesar-sepulveda.webp', width: 1600, height: 302 },
+  { id: 'pescaderia-del-sur', name: 'Pescadería del Sur', image: '/images/sponsors/pescaderia-del-sur.webp', width: 1600, height: 172 },
+  { id: 'transura', name: 'Transura Limitada', image: '/images/sponsors/transura.webp', width: 1340, height: 249 },
 ]
